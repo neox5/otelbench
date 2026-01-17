@@ -2,7 +2,7 @@ simulation:
   clocks:
     clk_mqput:
       type: periodic
-      interval: 1s
+      interval: 5s
 
   sources:
     src_mqput_events:

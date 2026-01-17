@@ -5,7 +5,7 @@
   "timezone": "browser",
   "schemaVersion": 39,
   "version": 1,
-  "refresh": "",
+  "refresh": "5s",
   "panels": [
     {
       "type": "timeseries",
@@ -27,6 +27,7 @@
           "refId": "A",
           "expr": "ibmmq_queue_mqput_count_total",
           "legendFormat": "mqput_total",
+          "interval": "1s",
           "datasource": {
             "type": "prometheus",
             "uid": "victoria_metrics"
@@ -36,6 +37,7 @@
           "refId": "B",
           "expr": "ibmmq_queue_mqput_rate",
           "legendFormat": "mqput_rate",
+          "interval": "1s",
           "datasource": {
             "type": "prometheus",
             "uid": "victoria_metrics"
@@ -74,7 +76,7 @@
               "tooltip": false,
               "viz": false
             },
-            "insertNulls": false,
+            "insertNulls": true,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -127,7 +129,7 @@
     }
   ],
   "time": {
-    "from": "now-15m",
+    "from": "now-1m",
     "to": "now"
   },
   "timepicker": {

@@ -15,5 +15,9 @@ otelcol.exporter.prometheus "victoriametrics" {
 prometheus.remote_write "victoriametrics" {
   endpoint {
     url = "http://victoriametrics:8428/api/v1/write"
+
+    queue_config {
+      batch_send_deadline = "100ms"
+    }
   }
 }
