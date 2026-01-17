@@ -45,7 +45,7 @@ export:
   otel:
     enabled: true
     host: alloy
-    interval: 2s
+    interval: 1s
     resource:
       service.name: obsbox
       service.version: 0.1.0
