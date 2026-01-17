@@ -6,6 +6,7 @@
   "schemaVersion": 39,
   "version": 1,
   "refresh": "5s",
+  "graphTooltip": 1,
   "panels": [
     {
       "type": "timeseries",
@@ -35,6 +36,16 @@
         },
         {
           "refId": "B",
+          "expr": "ibmmq_queue_mqput2_rate",
+          "legendFormat": "mqput_rate (original gauge)",
+          "interval": "1s",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "victoria_metrics"
+          }
+        },
+        {
+          "refId": "C",
           "expr": "ibmmq_queue_mqput_rate_accumulated_total",
           "legendFormat": "mqput_rate_accumulated (gauge→counter)",
           "interval": "1s",
@@ -52,7 +63,8 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "single",
+          "hideZeros": false,
+          "mode": "multi",
           "sort": "none"
         }
       },
@@ -107,7 +119,24 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "mqput_rate (original gauge)"
+            },
+            "properties": [
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              }
+            ]
+          }
+        ]
       }
     }
   ],

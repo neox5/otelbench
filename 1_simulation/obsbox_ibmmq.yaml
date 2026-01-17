@@ -20,6 +20,10 @@ simulation:
       clone: v_mqput_counter
       reset: on_read
 
+    v_mqput2_count_reseted:
+      clone: v_mqput_counter
+      reset: on_read
+
 metrics:
   - name:
       prometheus: ibmmq_queue_mqput_count_total
@@ -37,6 +41,16 @@ metrics:
     type: gauge
     description: "Recent MQ PUT operations in window"
     value: v_mqput_count_reseted
+    attributes:
+      queue: QUEUE.1
+      qmgr: QM1
+
+  - name:
+      prometheus: ibmmq_queue_mqput2_count_ratio
+      otel: ibmmq.queue.mqput2.rate
+    type: gauge
+    description: "Recent MQ PUT operations in window"
+    value: v_mqput2_count_reseted
     attributes:
       queue: QUEUE.1
       qmgr: QM1
