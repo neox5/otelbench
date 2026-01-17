@@ -35,7 +35,7 @@
         },
         {
           "refId": "B",
-          "expr": "ibmmq_queue_mqput_rate_accumulated",
+          "expr": "ibmmq_queue_mqput_rate_accumulated_total",
           "legendFormat": "mqput_rate_accumulated (gauge→counter)",
           "interval": "1s",
           "datasource": {

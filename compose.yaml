@@ -20,6 +20,7 @@ services:
       - run
       - /etc/alloy/config.alloy
       - --server.http.listen-addr=0.0.0.0:12345
+      - --stability.level=experimental
     ports:
       - "12345:12345"
       - "4317:4317"

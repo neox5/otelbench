@@ -18,11 +18,17 @@ otelcol.processor.transform "accumulate_gauge" {
   metric_statements {
     context = "metric"
     statements = [
-      `convert_gauge_to_sum("cumulative", true) where name == "ibmmq.queue.mqput.rate"`,
+      `convert_gauge_to_sum("delta", true) where name == "ibmmq.queue.mqput.rate"`,
       `set(name, "ibmmq.queue.mqput.rate.accumulated") where name == "ibmmq.queue.mqput.rate"`,
     ]
   }
 
+  output {
+    metrics = [otelcol.processor.deltatocumulative.default.input]
+  }
+}
+
+otelcol.processor.deltatocumulative "default" {
   output {
     metrics = [otelcol.exporter.prometheus.victoriametrics.input]
   }
