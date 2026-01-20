@@ -1,39 +1,39 @@
-# alloy-testbench
+# otel-testbench
 
-A pluggable testbench for developing and validating Grafana Alloy observability pipeline configurations.
+A pluggable testbench for developing and validating OpenTelemetry Collector observability pipeline configurations.
 
 ## Overview
 
-alloy-testbench orchestrates a complete observability stack using Podman Compose to enable Alloy configuration development with controlled, coherent synthetic telemetry.
+otel-testbench orchestrates a complete observability stack using Podman Compose to enable OTel Collector configuration development with controlled, coherent synthetic telemetry.
 
 **Components:**
 
 - **obsbox** - Generates coherent synthetic telemetry signals
-- **Grafana Alloy** - Observability data pipeline under test
+- **OpenTelemetry Collector** - Observability data pipeline under test
 - **VictoriaMetrics** - Time-series metric storage
 - **Grafana** - Metric visualization and validation
 
 ## Use Case
 
-Validate Alloy transformation correctness without production infrastructure. Test complex multi-stage transformation pipelines with mathematical verification.
+Validate OTel Collector transformation correctness without production infrastructure. Test complex multi-stage transformation pipelines with mathematical verification.
 
 **Example:** Verify that aggregating gauge metrics to produce a counter matches a directly generated counter (constant offset expected).
 
 ## Architecture
 
 ```
-obsbox (OTLP) → Alloy Chain (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
+obsbox (OTLP) → OTel Collector Chain (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
 ```
 
 All components run in containers with simple bridge networking. Fresh data on each run ensures reproducible tests.
 
 ## Current Status
 
-**Phase 1: Simple Chain** (In Progress)
+**Phase 2: OTel Collector Migration** (In Progress)
 
-- Repository structure established
-- Basic orchestration pending
-- Component integration pending
+- Core pipeline operational with transform and deltatocumulative processors
+- Metrics validation dashboard active
+- Loki integration pending
 
 ## Requirements
 
