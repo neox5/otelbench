@@ -1,2 +1,5 @@
 # snapshot files
 **/*.snp
+
+# analysis output files
+output/
