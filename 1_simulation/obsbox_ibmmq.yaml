@@ -17,11 +17,13 @@ simulation:
       transforms: [accumulate]
 
     v_mqput_count_reseted:
-      clone: v_mqput_counter
+      source: src_mqput_events
+      transforms: [accumulate]
       reset: on_read
 
     v_mqput2_count_reseted:
-      clone: v_mqput_counter
+      source: src_mqput_events
+      transforms: [accumulate]
       reset: on_read
 
 metrics:
