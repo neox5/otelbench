@@ -1,11 +1,11 @@
 version: "3.8"
 
 services:
-  obsbox:
-    image: ghcr.io/neox5/obsbox:latest
-    container_name: otelbench-obsbox
+  otelbox:
+    image: ghcr.io/neox5/otelbox:latest
+    container_name: otelbench-otelbox
     volumes:
-      - ./1_simulation/obsbox_ibmmq.yaml:/config/config.yaml:ro
+      - ./1_simulation/otelbox_ibmmq.yaml:/config/config.yaml:ro
     networks:
       - bench-net
 

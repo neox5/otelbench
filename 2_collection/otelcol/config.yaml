@@ -1,13 +1,13 @@
 # ============================================================================
 # OpenTelemetry Collector Configuration
 # ============================================================================
-# Pipeline: obsbox → OTLP receiver → transform → deltatocumulative →
+# Pipeline: otelbox → OTLP receiver → transform → deltatocumulative →
 #           prometheusremotewrite exporter → VictoriaMetrics
 # Container Stats: podman_stats receiver → VictoriaMetrics
 # ============================================================================
 
 receivers:
-  # OTLP receiver for metrics from obsbox
+  # OTLP receiver for metrics from otelbox
   otlp:
     protocols:
       grpc:
@@ -67,7 +67,7 @@ exporters:
 
 service:
   pipelines:
-    # Application metrics pipeline (obsbox)
+    # Application metrics pipeline (otelbox)
     metrics:
       receivers: [otlp]
       processors:

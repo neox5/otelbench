@@ -63,6 +63,6 @@ export:
     host: otelcol
     interval: 100ms
     resource:
-      service.name: obsbox
+      service.name: otelbox
       service.version: 0.1.0
       deployment.environment: development

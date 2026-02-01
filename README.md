@@ -8,7 +8,7 @@ otelbench orchestrates a complete observability stack using Podman Compose to en
 
 **Components:**
 
-- **obsbox** - Generates coherent synthetic telemetry signals
+- **otelbox** - Generates coherent synthetic telemetry signals
 - **OpenTelemetry Collector** - Observability data pipeline under test
 - **VictoriaMetrics** - Time-series metric storage
 - **Loki** - Log aggregation system
@@ -23,7 +23,7 @@ Validate OTel Collector transformation correctness without production infrastruc
 ## Architecture
 
 ```
-obsbox (OTLP) → OTel Collector Chain (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
+otelbox (OTLP) → OTel Collector Chain (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
                                               → Loki (OTLP)                            → Grafana (HTTP)
 ```
 
@@ -60,13 +60,13 @@ sudo chmod 666 $XDG_RUNTIME_DIR/podman/podman.sock
 - **Arch Linux (bare metal)**: Full support with above setup
 - **WSL2/Ubuntu**: Not functional - podman_stats receiver incompatible with WSL2 environment
 
-Note: Container metrics collection will be unavailable on WSL2/Ubuntu. Application metrics (obsbox telemetry) remain fully functional.
+Note: Container metrics collection will be unavailable on WSL2/Ubuntu. Application metrics (otelbox telemetry) remain fully functional.
 
 **Known Issue - WSL2/Ubuntu:**
 
 The `podman_stats` receiver cannot collect container statistics in WSL2 environments due to cgroups v2 requirements. The error `"No stats found"` is expected behavior. This limitation does not affect the core testbench functionality:
 
-- ✅ Application metrics (obsbox → OTel Collector → VictoriaMetrics) work normally
+- ✅ Application metrics (otelbox → OTel Collector → VictoriaMetrics) work normally
 - ✅ Transformation validation works normally
 - ✅ All dashboards except container resource table function correctly
 - ❌ Container metrics table will remain empty
