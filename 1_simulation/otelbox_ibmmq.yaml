@@ -1,28 +1,34 @@
-simulation:
-  clocks:
-    clk_mqput:
-      type: periodic
-      interval: 200ms
+iterators:
+  - name: q
+    type: range
+    start: 1
+    end: 2
 
+instances:
   sources:
-    src_mqput_events:
+    - name: src_int_{q}
       type: random_int
-      clock: clk_mqput
+      clock:
+        type: periodic
+        interval: 1s
       min: 0
       max: 10
 
   values:
-    v_mqput_counter:
-      source: src_mqput_events
+    - name: v_counter_{q}
+      source:
+        instance: src_int_{q}
       transforms: [accumulate]
 
-    v_mqput_count_reseted:
-      source: src_mqput_events
+    - name: v_count_reset_{q}
+      source:
+        instance: src_int_{q}
       transforms: [accumulate]
       reset: on_read
 
-    v_mqput2_count_reseted:
-      source: src_mqput_events
+    - name: v_count_reset2_{q}
+      source:
+        instance: src_int_{q}
       transforms: [accumulate]
       reset: on_read
 
@@ -32,36 +38,36 @@ metrics:
       otel: ibmmq.queue.mqput.count
     type: counter
     description: "Total MQ PUT operations since start"
-    value: v_mqput_counter
+    value:
+      instance: v_counter_{q}
     attributes:
-      queue: QUEUE.1
-      qmgr: QM1
+      queue: QUEUE_{q}
 
   - name:
       prometheus: ibmmq_queue_mqput_count_ratio
       otel: ibmmq.queue.mqput.rate
     type: gauge
     description: "Recent MQ PUT operations in window"
-    value: v_mqput_count_reseted
+    value:
+      instance: v_count_reset_{q}
     attributes:
-      queue: QUEUE.1
-      qmgr: QM1
+      queue: QUEUE_{q}
 
   - name:
       prometheus: ibmmq_queue_mqput2_count_ratio
       otel: ibmmq.queue.mqput2.rate
     type: gauge
     description: "Recent MQ PUT operations in window"
-    value: v_mqput2_count_reseted
+    value:
+      instance: v_count_reset2_{q}
     attributes:
-      queue: QUEUE.1
-      qmgr: QM1
+      queue: QUEUE_{q}
 
 export:
   otel:
     enabled: true
     host: otelcol
-    interval: 100ms
+    interval: 5s
     resource:
       service.name: otelbox
       service.version: 0.1.0
