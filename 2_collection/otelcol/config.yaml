@@ -43,12 +43,13 @@ processors:
   # Accumulate delta values to cumulative counter
   deltatocumulative:
     max_stale: 5m
-    max_streams: 1000
+    max_streams: 5000
 
   # Batch processor for efficiency
   batch:
-    timeout: 1s
-    send_batch_size: 1000
+    timeout: 5s
+    send_batch_size: 2000
+    send_batch_max_size: 3000
 
 exporters:
   # Export to VictoriaMetrics via Prometheus Remote Write
@@ -58,6 +59,20 @@ exporters:
       insecure: true
     resource_to_telemetry_conversion:
       enabled: true
+
+    # Remote write queue configuration for handling bursts
+    remote_write_queue:
+      enabled: true
+      queue_size: 50000 # Buffer for initial flood
+      num_consumers: 5 # Parallel workers
+
+    # Timeout and retry settings
+    timeout: 30s
+    retry_on_failure:
+      enabled: true
+      initial_interval: 1s
+      max_interval: 30s
+      max_elapsed_time: 5m
 
   # Debug exporter for troubleshooting (optional)
   debug:
