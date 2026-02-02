@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 2,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -307,200 +307,23 @@
         "type": "prometheus",
         "uid": "victoria_metrics"
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisBorderShow": false,
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "barWidthFactor": 0.6,
-            "drawStyle": "line",
-            "fillOpacity": 15,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "insertNulls": true,
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "showValues": false,
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "mqput_rate (original gauge)"
-            },
-            "properties": [
-              {
-                "id": "custom.drawStyle",
-                "value": "bars"
-              },
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "diff"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "light-red",
-                  "mode": "thresholds"
-                }
-              },
-              {
-                "id": "custom.drawStyle",
-                "value": "line"
-              },
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              },
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "green",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 1
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 9,
-        "w": 17,
-        "x": 0,
-        "y": 8
-      },
-      "id": 1,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "hideZeros": false,
-          "mode": "multi",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "expr": "ibmmq_queue_mqput_count_total",
-          "interval": "100ms",
-          "legendFormat": "mqput_total (original counter)",
-          "range": true,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "expr": "ibmmq_queue_mqput2_rate",
-          "interval": "100ms",
-          "legendFormat": "mqput_rate (original gauge)",
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "expr": "ibmmq_queue_mqput_rate_accumulated_total",
-          "interval": "100ms",
-          "legendFormat": "mqput_rate_accumulated (gauge→counter)",
-          "range": true,
-          "refId": "C"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "clamp_min(ibmmq_queue_mqput_count_total - ibmmq_queue_mqput_rate_accumulated_total, 0)",
-          "hide": false,
-          "instant": false,
-          "interval": "100ms",
-          "legendFormat": "diff",
-          "range": true,
-          "refId": "D"
-        }
-      ],
-      "title": "OTel Transform Validation ",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": ["sum"]
+            },
+            "inspect": false,
+            "minWidth": 50
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -516,46 +339,9 @@
           {
             "matcher": {
               "id": "byName",
-              "options": "rate_sum"
+              "options": "DIFF"
             },
             "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-yellow",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "rate_accumulated"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "semi-dark-blue",
-                  "mode": "fixed"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "diff"
-            },
-            "properties": [
-              {
-                "id": "color",
-                "value": {
-                  "fixedColor": "dark-red",
-                  "mode": "thresholds"
-                }
-              },
               {
                 "id": "thresholds",
                 "value": {
@@ -571,6 +357,19 @@
                     }
                   ]
                 }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
               }
             ]
           }
@@ -578,29 +377,17 @@
       },
       "gridPos": {
         "h": 9,
-        "w": 2,
-        "x": 17,
+        "w": 19,
+        "x": 0,
         "y": 8
       },
-      "id": 2,
+      "id": 23,
       "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "horizontal",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "titleSize": 15,
-          "valueSize": 25
-        },
-        "textMode": "value_and_name",
-        "wideLayout": true
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "frameIndex": 3,
+        "showHeader": true,
+        "sortBy": []
       },
       "pluginVersion": "12.3.1",
       "targets": [
@@ -612,20 +399,22 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "ibmmq_queue_mqput_count_total",
+          "format": "table",
           "hide": false,
           "instant": true,
           "legendFormat": "count",
           "range": false,
-          "refId": "A"
+          "refId": "count"
         },
         {
           "editorMode": "code",
           "exemplar": false,
           "expr": "sum_over_time(ibmmq_queue_mqput2_rate[10h])",
+          "format": "table",
           "instant": true,
           "legendFormat": "rate_sum",
           "range": false,
-          "refId": "B"
+          "refId": "rate_sum"
         },
         {
           "datasource": {
@@ -635,26 +424,70 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "ibmmq_queue_mqput_rate_accumulated_total",
+          "format": "table",
           "hide": false,
           "instant": true,
           "legendFormat": "rate_acc",
           "range": false,
-          "refId": "C"
+          "refId": "rate_acc"
         },
         {
           "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
+            "type": "prometheus",
+            "uid": "victoria_metrics"
           },
-          "expression": "$A-$C",
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "(sum_over_time(ibmmq_queue_mqput2_rate[10h])) - (ibmmq_queue_mqput_rate_accumulated_total)",
+          "format": "table",
           "hide": false,
-          "refId": "diff",
-          "type": "math"
+          "instant": true,
+          "legendFormat": "diff",
+          "range": false,
+          "refId": "diff"
         }
       ],
       "title": "",
-      "type": "stat"
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": [
+                "Value #count",
+                "Value #rate_sum",
+                "Value #rate_acc",
+                "Value #diff",
+                "queue"
+              ]
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "queue",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #count": "COUNT",
+              "Value #diff": "DIFF",
+              "Value #rate_acc": "RATE_ACC",
+              "Value #rate_sum": "RATE_SUM",
+              "queue": "QUEUE"
+            }
+          }
+        }
+      ],
+      "type": "table"
     },
     {
       "datasource": {
@@ -2113,7 +1946,18 @@
   "schemaVersion": 42,
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "baseFilters": [],
+        "datasource": {
+          "type": "prometheus",
+          "uid": "victoria_metrics"
+        },
+        "filters": [],
+        "name": "Filters",
+        "type": "adhoc"
+      }
+    ]
   },
   "time": {
     "from": "now-1m",

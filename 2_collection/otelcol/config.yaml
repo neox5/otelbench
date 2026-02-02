@@ -16,10 +16,10 @@ receivers:
         endpoint: 0.0.0.0:4318
 
   # Podman stats receiver for container metrics
-  podman_stats:
-    endpoint: "unix:///run/podman/podman.sock"
-    collection_interval: 5s
-    timeout: 5s
+  # podman_stats:
+  #   endpoint: "unix:///run/podman/podman.sock"
+  #   collection_interval: 5s
+  #   timeout: 5s
 
 processors:
   # Transform gauge metric to delta sum
@@ -75,10 +75,10 @@ service:
       exporters: [prometheusremotewrite]
 
     # Container metrics pipeline (podman stats)
-    metrics/container:
-      receivers: [podman_stats]
-      processors: [batch]
-      exporters: [prometheusremotewrite]
+    # metrics/container:
+    #   receivers: [podman_stats]
+    #   processors: [batch]
+    #   exporters: [prometheusremotewrite]
 
   # Enable telemetry for collector itself
   telemetry:
