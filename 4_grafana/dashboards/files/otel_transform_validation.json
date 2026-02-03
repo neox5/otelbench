@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -499,6 +499,179 @@
           "color": {
             "mode": "thresholds"
           },
+          "custom": {
+            "align": "auto",
+            "cellOptions": {
+              "type": "auto"
+            },
+            "filterable": true,
+            "footer": {
+              "reducers": ["sum"]
+            },
+            "inspect": false,
+            "minWidth": 50
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "DIFF"
+            },
+            "properties": [
+              {
+                "id": "thresholds",
+                "value": {
+                  "mode": "absolute",
+                  "steps": [
+                    {
+                      "color": "green",
+                      "value": 0
+                    },
+                    {
+                      "color": "red",
+                      "value": 1
+                    }
+                  ]
+                }
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "text",
+                  "mode": "thresholds"
+                }
+              },
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "color-text"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 19,
+        "x": 0,
+        "y": 17
+      },
+      "id": 24,
+      "options": {
+        "cellHeight": "sm",
+        "enablePagination": true,
+        "frameIndex": 3,
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "DIFF"
+          }
+        ]
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "victoria_metrics"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "ibmmq_queue_mqput_count_total",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "count",
+          "range": false,
+          "refId": "mqput"
+        },
+        {
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "ibmmq_queue_mqget_count_total",
+          "format": "table",
+          "instant": true,
+          "legendFormat": "rate_sum",
+          "range": false,
+          "refId": "mqget"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "victoria_metrics"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "ibmmq_queue_mqget_count_total - ibmmq_queue_mqput_count_total",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "rate_sum",
+          "range": false,
+          "refId": "diff"
+        }
+      ],
+      "title": "",
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "byVariable": false,
+            "include": {
+              "names": ["queue", "Value #diff", "Value #mqget", "Value #mqput"]
+            }
+          }
+        },
+        {
+          "id": "joinByField",
+          "options": {
+            "byField": "queue",
+            "mode": "outer"
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "includeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "Value #count": "COUNT",
+              "Value #diff": "DIFF",
+              "Value #mqget": "MQGET",
+              "Value #mqput": "MQPUT",
+              "Value #rate_acc": "RATE_ACC",
+              "Value #rate_sum": "RATE_SUM",
+              "queue": "QUEUE"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -520,7 +693,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 17
+        "y": 26
       },
       "id": 4,
       "options": {
@@ -590,7 +763,7 @@
         "h": 1,
         "w": 12,
         "x": 4,
-        "y": 17
+        "y": 26
       },
       "id": 6,
       "options": {
@@ -660,7 +833,7 @@
         "h": 1,
         "w": 3,
         "x": 16,
-        "y": 17
+        "y": 26
       },
       "id": 11,
       "options": {
@@ -726,7 +899,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 18
+        "y": 27
       },
       "id": 7,
       "options": {
@@ -796,7 +969,7 @@
         "h": 1,
         "w": 3,
         "x": 4,
-        "y": 18
+        "y": 27
       },
       "id": 8,
       "options": {
@@ -866,7 +1039,7 @@
         "h": 1,
         "w": 3,
         "x": 7,
-        "y": 18
+        "y": 27
       },
       "id": 9,
       "options": {
@@ -936,7 +1109,7 @@
         "h": 1,
         "w": 6,
         "x": 10,
-        "y": 18
+        "y": 27
       },
       "id": 15,
       "options": {
@@ -1006,7 +1179,7 @@
         "h": 1,
         "w": 3,
         "x": 16,
-        "y": 18
+        "y": 27
       },
       "id": 13,
       "options": {
@@ -1103,7 +1276,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 19
+        "y": 28
       },
       "id": 3,
       "options": {
@@ -1205,7 +1378,7 @@
         "h": 2,
         "w": 3,
         "x": 4,
-        "y": 19
+        "y": 28
       },
       "id": 5,
       "options": {
@@ -1295,7 +1468,7 @@
         "h": 2,
         "w": 3,
         "x": 7,
-        "y": 19
+        "y": 28
       },
       "id": 10,
       "options": {
@@ -1369,7 +1542,7 @@
         "h": 2,
         "w": 2,
         "x": 10,
-        "y": 19
+        "y": 28
       },
       "id": 14,
       "options": {
@@ -1432,7 +1605,7 @@
         "h": 2,
         "w": 2,
         "x": 12,
-        "y": 19
+        "y": 28
       },
       "id": 18,
       "options": {
@@ -1503,7 +1676,7 @@
         "h": 2,
         "w": 2,
         "x": 14,
-        "y": 19
+        "y": 28
       },
       "id": 17,
       "options": {
@@ -1581,7 +1754,7 @@
         "h": 2,
         "w": 3,
         "x": 16,
-        "y": 19
+        "y": 28
       },
       "id": 12,
       "options": {
@@ -1655,7 +1828,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 21
+        "y": 30
       },
       "id": 22,
       "options": {
@@ -1782,7 +1955,7 @@
         "h": 4,
         "w": 3,
         "x": 10,
-        "y": 21
+        "y": 30
       },
       "id": 16,
       "options": {
@@ -1881,7 +2054,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 22
+        "y": 31
       },
       "id": 21,
       "options": {

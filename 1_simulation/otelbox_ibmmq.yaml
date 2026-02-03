@@ -2,7 +2,7 @@ iterators:
   - name: q
     type: range
     start: 1
-    end: 4000
+    end: 2000
 
 instances:
   sources:
@@ -15,51 +15,38 @@ instances:
       max: 10
 
   values:
-    - name: v_counter_{q}
-      source:
-        instance: src_int_{q}
-      transforms: [accumulate]
-
-    - name: v_count_reset_{q}
+    - name: v_put_counter_{q}
       source:
         instance: src_int_{q}
       transforms: [accumulate]
       reset: on_read
 
-    - name: v_count_reset2_{q}
+    - name: v_get_counter_{q}
       source:
         instance: src_int_{q}
       transforms: [accumulate]
       reset: on_read
 
 metrics:
+  # Original counter metric (mimics decentral system - already sum)
   - name:
-      prometheus: ibmmq_queue_mqput_count_total
-      otel: ibmmq.queue.mqput.count
-    type: counter
+      prometheus: ibmmq_queue_mqput_mqput1_count_total
+      otel: ibmmq.queue.mqput_mqput1_count
+    type: gauge
     description: "Total MQ PUT operations since start"
     value:
-      instance: v_counter_{q}
+      instance: v_put_counter_{q}
     attributes:
       queue: QUEUE_{q}
 
+  # Rate gauge metric (mimics central system - gauge that needs conversion)
   - name:
-      prometheus: ibmmq_queue_mqput_count_ratio
-      otel: ibmmq.queue.mqput.rate
+      prometheus: ibmmq_queue_mqget_count_ratio
+      otel: ibmmq.queue.mqget_count
     type: gauge
-    description: "Recent MQ PUT operations in window"
+    description: "Recent MQ GET operations in window"
     value:
-      instance: v_count_reset_{q}
-    attributes:
-      queue: QUEUE_{q}
-
-  - name:
-      prometheus: ibmmq_queue_mqput2_count_ratio
-      otel: ibmmq.queue.mqput2.rate
-    type: gauge
-    description: "Recent MQ PUT operations in window"
-    value:
-      instance: v_count_reset2_{q}
+      instance: v_get_counter_{q}
     attributes:
       queue: QUEUE_{q}
 

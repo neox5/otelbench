@@ -1,7 +1,7 @@
 # ============================================================================
 # OpenTelemetry Collector Configuration
 # ============================================================================
-# Pipeline: otelbox → OTLP receiver → transform → deltatocumulative →
+# Pipeline: otelbox → OTLP receiver → rename → gauge_to_sum → deltatocumulative →
 #           prometheusremotewrite exporter → VictoriaMetrics
 # Container Stats: podman_stats receiver → VictoriaMetrics
 # ============================================================================
@@ -22,23 +22,25 @@ receivers:
   #   timeout: 5s
 
 processors:
-  # Transform gauge metric to delta sum
-  transform/gauge_to_sum:
-    error_mode: ignore
-    metric_statements:
-      - context: metric
-        statements:
-          # Convert gauge to delta sum for the rate metric
-          - convert_gauge_to_sum("delta", true) where name == "ibmmq.queue.mqput.rate"
-
-  # Rename transformed metric
+  # Rename metrics to final naming convention
   transform/rename:
     error_mode: ignore
     metric_statements:
       - context: metric
         statements:
-          # Rename to indicate it's accumulated
-          - set(name, "ibmmq.queue.mqput.rate.accumulated") where name == "ibmmq.queue.mqput.rate"
+          # Rename mqput_mqput1 to mqput (remove redundant _mqput1)
+          - replace_pattern(name, "mqput_mqput1", "mqput") where name == "ibmmq.queue.mqput_mqput1_count"
+
+  # Convert gauge metrics to delta sum (no-op if already sum)
+  transform/gauge_to_sum:
+    error_mode: ignore
+    metric_statements:
+      - context: metric
+        statements:
+          # Convert gauge to delta sum for mqput count metric
+          - convert_gauge_to_sum("delta", true) where name == "ibmmq.queue.mqput_count"
+          # Convert gauge to delta sum for mqget count metric
+          - convert_gauge_to_sum("delta", true) where name == "ibmmq.queue.mqget_count"
 
   # Accumulate delta values to cumulative counter
   deltatocumulative:
@@ -86,7 +88,7 @@ service:
     metrics:
       receivers: [otlp]
       processors:
-        [transform/gauge_to_sum, transform/rename, deltatocumulative, batch]
+        [transform/rename, transform/gauge_to_sum, deltatocumulative, batch]
       exporters: [prometheusremotewrite]
 
     # Container metrics pipeline (podman stats)
