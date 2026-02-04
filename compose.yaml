@@ -14,12 +14,25 @@ services:
     container_name: otelbench-otelcol
     volumes:
       - ./2_collection/otelcol/config.yaml:/etc/otelcol-contrib/config.yaml:ro
-      - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
     ports:
       - "4317:4317" # OTLP gRPC
       - "4318:4318" # OTLP HTTP
       - "8888:8888" # Metrics endpoint
+    networks:
+      - bench-net
+
+  otelcol-gateway:
+    image: docker.io/otel/opentelemetry-collector-contrib:latest
+    container_name: otelbench-otelcol-gateway
+    volumes:
+      - ./2_collection/otelcol_gateway/config.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    ports:
+      - "4319:4317" # OTLP gRPC (external access on different port)
+      - "4320:4318" # OTLP HTTP (external access on different port)
+      - "8889:8888" # Metrics endpoint
     networks:
       - bench-net
 

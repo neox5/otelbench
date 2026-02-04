@@ -26,287 +26,6 @@
         "type": "prometheus",
         "uid": "victoria_metrics"
       },
-      "description": "Container resource usage overview",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "custom": {
-            "align": "auto",
-            "cellOptions": {
-              "type": "auto"
-            },
-            "footer": {
-              "reducers": []
-            },
-            "inspect": false
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "yellow",
-                "value": 50
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          },
-          "unit": "short"
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "CPU %"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory %"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "percent"
-              },
-              {
-                "id": "custom.cellOptions",
-                "value": {
-                  "type": "color-background"
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Memory Usage"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Network RX"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Network TX"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "decbytes"
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 19,
-        "x": 0,
-        "y": 0
-      },
-      "id": 20,
-      "options": {
-        "cellHeight": "sm",
-        "footer": {
-          "countRows": false,
-          "enablePagination": false,
-          "fields": "",
-          "reducer": ["sum"],
-          "show": false
-        },
-        "showHeader": true,
-        "sortBy": []
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "container_cpu_percent_ratio",
-          "format": "table",
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "CPU"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "container_memory_percent_ratio",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "Memory"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "container_memory_usage_total_bytes",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "MemUsage"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "container_network_io_usage_rx_bytes_total",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "NetRX"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "container_network_io_usage_tx_bytes_total",
-          "format": "table",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "__auto",
-          "range": false,
-          "refId": "NetTX"
-        }
-      ],
-      "title": "Container Resource Overview",
-      "transformations": [
-        {
-          "id": "joinByField",
-          "options": {
-            "byField": "container_name",
-            "mode": "outer"
-          }
-        },
-        {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "Time": true,
-              "Time 1": true,
-              "Time 2": true,
-              "Time 3": true,
-              "Time 4": true,
-              "Time 5": true,
-              "__name__": true,
-              "__name__ 1": true,
-              "__name__ 2": true,
-              "__name__ 3": true,
-              "__name__ 4": true,
-              "__name__ 5": true,
-              "container_id": true,
-              "container_id 1": true,
-              "container_id 2": true,
-              "container_id 3": true,
-              "container_id 4": true,
-              "container_id 5": true,
-              "container_image_id": true,
-              "container_image_name 1": true,
-              "container_image_name 2": true,
-              "container_image_name 3": true,
-              "container_image_name 4": true,
-              "container_image_name 5": true,
-              "container_runtime 1": true,
-              "container_runtime 2": true,
-              "container_runtime 3": true,
-              "container_runtime 4": true,
-              "container_runtime 5": true,
-              "instance": true,
-              "job": true
-            },
-            "includeByName": {},
-            "indexByName": {
-              "Time": 0,
-              "Value #CPU": 2,
-              "Value #MemUsage": 4,
-              "Value #Memory": 3,
-              "Value #NetRX": 5,
-              "Value #NetTX": 6,
-              "container_name": 1
-            },
-            "orderByMode": "manual",
-            "renameByName": {
-              "Value #CPU": "CPU %",
-              "Value #MemUsage": "Memory Usage",
-              "Value #Memory": "Memory %",
-              "Value #NetRX": "Network RX",
-              "Value #NetTX": "Network TX",
-              "container_name": "Container"
-            }
-          }
-        }
-      ],
-      "type": "table"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -379,7 +98,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 8
+        "y": 0
       },
       "id": 23,
       "options": {
@@ -566,7 +285,7 @@
         "h": 9,
         "w": 19,
         "x": 0,
-        "y": 17
+        "y": 9
       },
       "id": 24,
       "options": {
@@ -693,7 +412,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 26
+        "y": 18
       },
       "id": 4,
       "options": {
@@ -763,7 +482,7 @@
         "h": 1,
         "w": 12,
         "x": 4,
-        "y": 26
+        "y": 18
       },
       "id": 6,
       "options": {
@@ -833,7 +552,7 @@
         "h": 1,
         "w": 3,
         "x": 16,
-        "y": 26
+        "y": 18
       },
       "id": 11,
       "options": {
@@ -899,7 +618,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 27
+        "y": 19
       },
       "id": 7,
       "options": {
@@ -969,7 +688,7 @@
         "h": 1,
         "w": 3,
         "x": 4,
-        "y": 27
+        "y": 19
       },
       "id": 8,
       "options": {
@@ -1039,7 +758,7 @@
         "h": 1,
         "w": 3,
         "x": 7,
-        "y": 27
+        "y": 19
       },
       "id": 9,
       "options": {
@@ -1109,7 +828,7 @@
         "h": 1,
         "w": 6,
         "x": 10,
-        "y": 27
+        "y": 19
       },
       "id": 15,
       "options": {
@@ -1179,7 +898,7 @@
         "h": 1,
         "w": 3,
         "x": 16,
-        "y": 27
+        "y": 19
       },
       "id": 13,
       "options": {
@@ -1276,7 +995,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 28
+        "y": 20
       },
       "id": 3,
       "options": {
@@ -1378,7 +1097,7 @@
         "h": 2,
         "w": 3,
         "x": 4,
-        "y": 28
+        "y": 20
       },
       "id": 5,
       "options": {
@@ -1468,7 +1187,7 @@
         "h": 2,
         "w": 3,
         "x": 7,
-        "y": 28
+        "y": 20
       },
       "id": 10,
       "options": {
@@ -1542,7 +1261,7 @@
         "h": 2,
         "w": 2,
         "x": 10,
-        "y": 28
+        "y": 20
       },
       "id": 14,
       "options": {
@@ -1605,7 +1324,7 @@
         "h": 2,
         "w": 2,
         "x": 12,
-        "y": 28
+        "y": 20
       },
       "id": 18,
       "options": {
@@ -1676,7 +1395,7 @@
         "h": 2,
         "w": 2,
         "x": 14,
-        "y": 28
+        "y": 20
       },
       "id": 17,
       "options": {
@@ -1754,7 +1473,7 @@
         "h": 2,
         "w": 3,
         "x": 16,
-        "y": 28
+        "y": 20
       },
       "id": 12,
       "options": {
@@ -1828,7 +1547,7 @@
         "h": 1,
         "w": 4,
         "x": 0,
-        "y": 30
+        "y": 22
       },
       "id": 22,
       "options": {
@@ -1955,7 +1674,7 @@
         "h": 4,
         "w": 3,
         "x": 10,
-        "y": 30
+        "y": 22
       },
       "id": 16,
       "options": {
@@ -2054,7 +1773,7 @@
         "h": 2,
         "w": 4,
         "x": 0,
-        "y": 31
+        "y": 23
       },
       "id": 21,
       "options": {
@@ -2138,7 +1857,7 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "OTel Transform Validation",
-  "uid": "otel_transform_validation",
+  "title": "04_validation",
+  "uid": "04_validation",
   "version": 1
 }

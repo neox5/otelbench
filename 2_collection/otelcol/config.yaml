@@ -1,9 +1,8 @@
 # ============================================================================
 # OpenTelemetry Collector Configuration
 # ============================================================================
-# Pipeline: otelbox → OTLP receiver → rename → gauge_to_sum → deltatocumulative →
-#           prometheusremotewrite exporter → VictoriaMetrics
-# Container Stats: podman_stats receiver → VictoriaMetrics
+# Pipeline: otelbox → OTLP receiver → rename → gauge_to_sum →
+#           deltatocumulative → otelcol-gateway
 # ============================================================================
 
 receivers:
@@ -12,14 +11,6 @@ receivers:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
-      http:
-        endpoint: 0.0.0.0:4318
-
-  # Podman stats receiver for container metrics
-  # podman_stats:
-  #   endpoint: "unix:///run/podman/podman.sock"
-  #   collection_interval: 5s
-  #   timeout: 5s
 
 processors:
   # Rename metrics to final naming convention
@@ -47,34 +38,12 @@ processors:
     max_stale: 5m
     max_streams: 5000
 
-  # Batch processor for efficiency
-  batch:
-    timeout: 5s
-    send_batch_size: 2000
-    send_batch_max_size: 3000
-
 exporters:
-  # Export to VictoriaMetrics via Prometheus Remote Write
-  prometheusremotewrite:
-    endpoint: http://victoriametrics:8428/api/v1/write
+  # Export to gateway via OTLP
+  otlp:
+    endpoint: otelcol-gateway:4317
     tls:
       insecure: true
-    resource_to_telemetry_conversion:
-      enabled: true
-
-    # Remote write queue configuration for handling bursts
-    remote_write_queue:
-      enabled: true
-      queue_size: 50000 # Buffer for initial flood
-      num_consumers: 5 # Parallel workers
-
-    # Timeout and retry settings
-    timeout: 30s
-    retry_on_failure:
-      enabled: true
-      initial_interval: 1s
-      max_interval: 30s
-      max_elapsed_time: 5m
 
   # Debug exporter for troubleshooting (optional)
   debug:
@@ -87,38 +56,28 @@ service:
     # Application metrics pipeline (otelbox)
     metrics:
       receivers: [otlp]
-      processors:
-        [transform/rename, transform/gauge_to_sum, deltatocumulative, batch]
-      exporters: [prometheusremotewrite]
-
-    # Container metrics pipeline (podman stats)
-    # metrics/container:
-    #   receivers: [podman_stats]
-    #   processors: [batch]
-    #   exporters: [prometheusremotewrite]
+      processors: [transform/rename, transform/gauge_to_sum, deltatocumulative]
+      exporters: [otlp]
 
   # Enable telemetry for collector itself
   telemetry:
     logs:
       level: info
-      processors:
-        - batch:
-            exporter:
-              otlp:
-                protocol: http/protobuf
-                endpoint: http://loki:3100/otlp/v1/logs
 
     metrics:
       level: detailed
       readers:
         - periodic:
-            interval: 5
+            interval: 5000
             exporter:
               otlp:
-                protocol: http/protobuf
-                endpoint: http://victoriametrics:8428/opentelemetry/v1/metrics
+                protocol: grpc
+                endpoint: http://localhost:4317
 
     resource:
-      service.name: otel-collector
+      # Use Prometheus format (underscores) for consistency with gateway
+      # These attributes route through gateway's prometheusremotewrite exporter
+      # which converts OTLP dots to Prometheus underscores, so we pre-convert
+      service.name: otelcol
       service.version: 0.1.0
       deployment.environment: development
