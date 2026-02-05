@@ -36,14 +36,28 @@ processors:
   # Accumulate delta values to cumulative counter
   deltatocumulative:
     max_stale: 5m
-    max_streams: 5000
+    max_streams: 10000
 
 exporters:
   # Export to gateway via OTLP
+  # Queue protects against gateway failures (HA cluster, F5 routing, network issues)
   otlp:
     endpoint: otelcol-gateway:4317
     tls:
       insecure: true
+
+    # Persistent queue for resilience
+    sending_queue:
+      enabled: true
+      queue_size: 5000 # Buffer for gateway unavailability
+      num_consumers: 2 # Parallel senders
+
+    # Retry on transient failures
+    retry_on_failure:
+      enabled: true
+      initial_interval: 1s
+      max_interval: 30s
+      max_elapsed_time: 5m
 
   # Debug exporter for troubleshooting (optional)
   debug:
