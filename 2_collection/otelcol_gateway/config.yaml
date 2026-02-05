@@ -99,4 +99,5 @@ service:
       # to match prometheusremotewrite exporter conversion for consistency
       service.name: otelcol-gateway
       service.version: 0.1.0
+      service.instance.id: "${HOSTNAME}"
       deployment.environment: development

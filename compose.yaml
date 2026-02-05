@@ -22,17 +22,38 @@ services:
     networks:
       - bench-net
 
-  otelcol-gateway:
+  haproxy:
+    image: docker.io/library/haproxy:latest
+    container_name: otelbench-haproxy
+    volumes:
+      - ./2_collection/haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "8404:8404" # Stats dashboard
+    networks:
+      - bench-net
+    depends_on:
+      - otelcol-gateway-1
+      - otelcol-gateway-2
+
+  otelcol-gateway-1:
     image: docker.io/otel/opentelemetry-collector-contrib:latest
-    container_name: otelbench-otelcol-gateway
+    container_name: otelbench-otelcol-gateway-1
+    hostname: gateway-1
     volumes:
       - ./2_collection/otelcol_gateway/config.yaml:/etc/otelcol-contrib/config.yaml:ro
       - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
-    ports:
-      - "4319:4317" # OTLP gRPC (external access on different port)
-      - "4320:4318" # OTLP HTTP (external access on different port)
-      - "8889:8888" # Metrics endpoint
+    networks:
+      - bench-net
+
+  otelcol-gateway-2:
+    image: docker.io/otel/opentelemetry-collector-contrib:latest
+    container_name: otelbench-otelcol-gateway-2
+    hostname: gateway-2
+    volumes:
+      - ./2_collection/otelcol_gateway/config.yaml:/etc/otelcol-contrib/config.yaml:ro
+      - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
     networks:
       - bench-net
 

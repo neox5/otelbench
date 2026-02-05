@@ -42,7 +42,7 @@ exporters:
   # Export to gateway via OTLP
   # Queue protects against gateway failures (HA cluster, F5 routing, network issues)
   otlp:
-    endpoint: otelcol-gateway:4317
+    endpoint: haproxy:4317
     tls:
       insecure: true
 
