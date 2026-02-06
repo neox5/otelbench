@@ -4,6 +4,7 @@ services:
   otelbox:
     image: ghcr.io/neox5/otelbox:latest
     container_name: otelbench-otelbox
+    hostname: otelbox-1
     volumes:
       - ./1_simulation/otelbox_ibmmq.yaml:/config/config.yaml:ro
     networks:

@@ -46,6 +46,17 @@ exporters:
     tls:
       insecure: true
 
+    # gRPC keepalive for connection health monitoring
+    # PING cycle: 30s interval, 10s timeout = ~40s to detect dead connection
+    # Coordinates with HAProxy timeouts (client/server: 60s > 30s keepalive)
+    keepalive:
+      time: 30s # Send PING every 30 seconds
+      timeout: 10s # Wait 10s for PONG response
+      permit_without_stream: true # PING even when no active RPCs
+
+    # Request timeout (per export attempt)
+    timeout: 10s
+
     # Persistent queue for resilience
     sending_queue:
       enabled: true
@@ -57,7 +68,7 @@ exporters:
       enabled: true
       initial_interval: 1s
       max_interval: 30s
-      max_elapsed_time: 5m
+      max_elapsed_time: 1m
 
   # Debug exporter for troubleshooting (optional)
   debug:

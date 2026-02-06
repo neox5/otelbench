@@ -35,6 +35,10 @@ up-bench: setup-socket
 
 # Stop all services and remove volumes
 down:
+	podman-compose down -v -t 0
+
+# Stop all services (including otelcol-bench) and remove volumes
+down-bench:
 	podman-compose --profile bench down -v -t 0
 
 # Restart all services

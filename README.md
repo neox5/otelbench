@@ -10,30 +10,41 @@ otelbench orchestrates a complete observability stack using Podman Compose to en
 
 - **otelbox** - Generates coherent synthetic telemetry signals
 - **OpenTelemetry Collector** - Observability data pipeline under test
+- **HAProxy** - Load balancer for gateway high availability testing
 - **VictoriaMetrics** - Time-series metric storage
 - **Loki** - Log aggregation system
 - **Grafana** - Metric visualization and validation
 
 ## Use Case
 
-Validate OTel Collector transformation correctness without production infrastructure. Test complex multi-stage transformation pipelines with mathematical verification.
+Validate OTel Collector transformation correctness without production infrastructure. Test complex multi-stage transformation pipelines with mathematical verification. Test high availability and failover scenarios with multiple gateway instances.
 
 **Example:** Verify that aggregating gauge metrics to produce a counter matches a directly generated counter (constant offset expected).
 
 ## Architecture
 
 ```
-otelbox (OTLP) → OTel Collector Chain (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
-                                              → Loki (OTLP)                            → Grafana (HTTP)
+otelbox (OTLP) → OTel Collector (OTLP + gRPC keepalive) → HAProxy (TCP LB) → Gateway-1 (OTLP) → VictoriaMetrics (Prometheus Remote Write) → Grafana (HTTP)
+                                                                           → Gateway-2 (OTLP) → Loki (OTLP)                            → Grafana (HTTP)
 ```
+
+**Failover Mechanism:**
+
+- OTel Collector sends gRPC keepalive PING every 30 seconds
+- Dead connections detected after 10 seconds (no PONG response)
+- HAProxy routes new connections to healthy gateways
+- Total failover time: 10-15 seconds
+- Queue prevents data loss during transition
 
 All components run in containers with simple bridge networking. Fresh data on each run ensures reproducible tests.
 
 ## Current Status
 
-**Phase 2: OTel Collector Migration** (In Progress)
+**Phase 2: OTel Collector Migration** (Complete)
 
 - Core pipeline operational with transform and deltatocumulative processors
+- High availability testing with HAProxy load balancer
+- gRPC keepalive for connection health monitoring
 - Metrics validation dashboard active
 - Loki integration complete
 - Self-monitoring in progress
@@ -94,6 +105,7 @@ sudo chmod 666 $XDG_RUNTIME_DIR/podman/podman.sock
 
 - ✅ Application metrics (otelbox → OTel Collector → VictoriaMetrics) work normally
 - ✅ Transformation validation works normally
+- ✅ Failover testing works normally
 - ✅ All dashboards except container resource table function correctly
 - ❌ Container metrics unavailable (WSL2 cgroups v2 limitation)
 
@@ -111,8 +123,8 @@ sudo chmod 666 $XDG_RUNTIME_DIR/podman/podman.sock
 
 ```
 otelbox              → Telemetry generator
-otelcol              → Primary collector (transforms)
-haproxy              → Load balancer (OTLP traffic)
+otelcol              → Primary collector (transforms + keepalive)
+haproxy              → Load balancer (OTLP traffic distribution)
 otelcol-gateway-1    → Gateway instance 1 (storage export)
 otelcol-gateway-2    → Gateway instance 2 (storage export)
 otelcol-bench        → Infrastructure monitoring (optional, Arch only)

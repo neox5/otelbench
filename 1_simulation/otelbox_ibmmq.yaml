@@ -58,4 +58,5 @@ export:
     resource:
       service.name: otelbox
       service.version: 0.1.0
+      service.instance.id: "${HOSTNAME}"
       deployment.environment: development
