@@ -41,7 +41,6 @@ services:
     hostname: gateway-1
     volumes:
       - ./2_collection/otelcol_gateway/config.yaml:/etc/otelcol-contrib/config.yaml:ro
-      - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
     networks:
       - bench-net
@@ -52,6 +51,16 @@ services:
     hostname: gateway-2
     volumes:
       - ./2_collection/otelcol_gateway/config.yaml:/etc/otelcol-contrib/config.yaml:ro
+    command: ["--config=/etc/otelcol-contrib/config.yaml"]
+    networks:
+      - bench-net
+
+  otelcol-bench:
+    profiles: ["bench"]
+    image: docker.io/otel/opentelemetry-collector-contrib:latest
+    container_name: otelbench-otelcol-bench
+    volumes:
+      - ./2_collection/otelcol_bench/config.yaml:/etc/otelcol-contrib/config.yaml:ro
       - ${XDG_RUNTIME_DIR}/podman/podman.sock:/run/podman/podman.sock:ro
     command: ["--config=/etc/otelcol-contrib/config.yaml"]
     networks:

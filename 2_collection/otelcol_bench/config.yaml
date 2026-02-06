@@ -1,7 +1,8 @@
 # ============================================================================
-# OpenTelemetry Collector Gateway Configuration
+# OpenTelemetry Collector Bench Configuration
 # ============================================================================
-# Pipeline: otlp → batch → prometheusremotewrite/loki
+# Pipeline: podman_stats → batch → prometheusremotewrite
+# Monitors testbench infrastructure (containers)
 # ============================================================================
 
 receivers:
@@ -9,6 +10,12 @@ receivers:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
+
+  # Podman stats receiver for container metrics
+  podman_stats:
+    endpoint: "unix:///run/podman/podman.sock"
+    collection_interval: 5s
+    timeout: 5s
 
 processors:
   # Batch processor for efficiency
@@ -26,11 +33,11 @@ exporters:
     resource_to_telemetry_conversion:
       enabled: true
 
-    # Remote write queue configuration for handling bursts
+    # Remote write queue configuration
     remote_write_queue:
       enabled: true
-      queue_size: 50000 # Buffer for initial flood
-      num_consumers: 5 # Parallel workers
+      queue_size: 10000
+      num_consumers: 2
 
     # Timeout and retry settings
     timeout: 30s
@@ -40,12 +47,6 @@ exporters:
       max_interval: 30s
       max_elapsed_time: 5m
 
-  # Export to Loki via OTLP
-  otlp/loki:
-    endpoint: loki:3100
-    tls:
-      insecure: true
-
   # Debug exporter for troubleshooting (optional)
   debug:
     verbosity: detailed
@@ -54,17 +55,11 @@ exporters:
 
 service:
   pipelines:
-    # Application metrics pipeline
-    metrics:
-      receivers: [otlp]
+    # Container metrics pipeline (podman stats)
+    metrics/container:
+      receivers: [otlp, podman_stats]
       processors: [batch]
       exporters: [prometheusremotewrite]
-
-    # Application logs pipeline
-    logs:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp/loki]
 
   # Enable telemetry for collector itself
   telemetry:
@@ -82,7 +77,6 @@ service:
                 endpoint: http://localhost:4317
 
     resource:
-      service.name: otelcol-gateway
+      service.name: otelcol-bench
       service.version: 0.1.0
-      service.instance.id: "${HOSTNAME}"
       deployment.environment: development

@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": 1,
+  "id": 2,
   "links": [],
   "panels": [
     {
@@ -27,7 +27,7 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 4,
         "w": 2,
         "x": 0,
         "y": 0
@@ -46,426 +46,6 @@
       "title": "",
       "transparent": true,
       "type": "text"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 7,
-        "x": 2,
-        "y": 0
-      },
-      "id": 42,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "System Metrics",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 1,
-        "x": 9,
-        "y": 0
-      },
-      "id": 26,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "rcvr/otlp",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 2,
-        "x": 10,
-        "y": 0
-      },
-      "id": 27,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "transform/rename",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 2,
-        "x": 12,
-        "y": 0
-      },
-      "id": 29,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "transform/gauge_to_sum",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 14,
-        "y": 0
-      },
-      "id": 33,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "deltatocumulative",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 17,
-        "y": 0
-      },
-      "id": 38,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "exp/otlp",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
     },
     {
       "datasource": {
@@ -504,7 +84,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 1
+        "y": 0
       },
       "id": 5,
       "options": {
@@ -606,7 +186,7 @@
         "h": 6,
         "w": 4,
         "x": 5,
-        "y": 1
+        "y": 0
       },
       "id": 15,
       "options": {
@@ -646,6 +226,356 @@
       ],
       "title": "Runtime Memory",
       "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 1,
+        "x": 9,
+        "y": 0
+      },
+      "id": 26,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 10
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "0",
+          "hide": false,
+          "refId": "rcvr/otlp",
+          "type": "math"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 2,
+        "x": 10,
+        "y": 0
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 10
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "0",
+          "hide": false,
+          "refId": "transform/rename",
+          "type": "math"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 2,
+        "x": 12,
+        "y": 0
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 10
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "0",
+          "hide": false,
+          "refId": "transform/gauge_to_sum",
+          "type": "math"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 3,
+        "x": 14,
+        "y": 0
+      },
+      "id": 33,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 10
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "0",
+          "hide": false,
+          "refId": "deltatocumulative",
+          "type": "math"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoria_metrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": 0
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 1,
+        "w": 3,
+        "x": 17,
+        "y": 0
+      },
+      "id": 38,
+      "options": {
+        "colorMode": "none",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "text": {
+          "valueSize": 10
+        },
+        "textMode": "name",
+        "wideLayout": true
+      },
+      "pluginVersion": "12.3.1",
+      "targets": [
+        {
+          "datasource": {
+            "name": "Expression",
+            "type": "__expr__",
+            "uid": "__expr__"
+          },
+          "expression": "0",
+          "hide": false,
+          "refId": "exp/otlp",
+          "type": "math"
+        }
+      ],
+      "title": "",
+      "transparent": true,
+      "type": "stat"
     },
     {
       "datasource": {
@@ -725,7 +655,7 @@
         "h": 5,
         "w": 1,
         "x": 9,
-        "y": 2
+        "y": 1
       },
       "id": 22,
       "options": {
@@ -839,7 +769,7 @@
         "h": 2,
         "w": 2,
         "x": 10,
-        "y": 2
+        "y": 1
       },
       "id": 23,
       "options": {
@@ -939,7 +869,7 @@
         "h": 2,
         "w": 2,
         "x": 12,
-        "y": 2
+        "y": 1
       },
       "id": 30,
       "options": {
@@ -1075,7 +1005,7 @@
         "h": 2,
         "w": 3,
         "x": 14,
-        "y": 2
+        "y": 1
       },
       "id": 34,
       "options": {
@@ -1193,14 +1123,14 @@
         "h": 2,
         "w": 3,
         "x": 17,
-        "y": 2
+        "y": 1
       },
       "id": 39,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "vertical",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": ["lastNotNull"],
@@ -1273,7 +1203,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 3
+        "y": 2
       },
       "id": 6,
       "options": {
@@ -1341,7 +1271,7 @@
         "h": 3,
         "w": 2,
         "x": 10,
-        "y": 4
+        "y": 3
       },
       "id": 28,
       "options": {
@@ -1405,7 +1335,7 @@
         "h": 3,
         "w": 2,
         "x": 12,
-        "y": 4
+        "y": 3
       },
       "id": 31,
       "options": {
@@ -1525,7 +1455,7 @@
         "h": 3,
         "w": 3,
         "x": 14,
-        "y": 4
+        "y": 3
       },
       "id": 37,
       "options": {
@@ -1603,7 +1533,7 @@
         "h": 3,
         "w": 1,
         "x": 17,
-        "y": 4
+        "y": 3
       },
       "id": 40,
       "options": {
@@ -1729,7 +1659,7 @@
         "h": 3,
         "w": 2,
         "x": 18,
-        "y": 4
+        "y": 3
       },
       "id": 41,
       "options": {
@@ -1799,7 +1729,7 @@
         "h": 2,
         "w": 2,
         "x": 0,
-        "y": 5
+        "y": 4
       },
       "id": 7,
       "options": {
@@ -1868,7 +1798,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 5
+        "y": 4
       },
       "id": 9,
       "options": {
@@ -1912,7 +1842,7 @@
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 7
+        "y": 6
       },
       "id": 20,
       "options": {
@@ -1937,7 +1867,7 @@
         "h": 4,
         "w": 2,
         "x": 0,
-        "y": 8
+        "y": 7
       },
       "id": 10,
       "options": {
@@ -1991,7 +1921,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 8
+        "y": 7
       },
       "id": 12,
       "options": {
@@ -2093,7 +2023,7 @@
         "h": 6,
         "w": 4,
         "x": 5,
-        "y": 8
+        "y": 7
       },
       "id": 4,
       "options": {
@@ -2163,9 +2093,9 @@
       },
       "gridPos": {
         "h": 1,
-        "w": 3,
+        "w": 1,
         "x": 9,
-        "y": 8
+        "y": 7
       },
       "id": 24,
       "options": {
@@ -2181,7 +2111,7 @@
         },
         "showPercentChange": false,
         "text": {
-          "valueSize": 15
+          "valueSize": 10
         },
         "textMode": "name",
         "wideLayout": true
@@ -2228,18 +2158,6 @@
           }
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "accepted"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "cps"
-              }
-            ]
-          },
           {
             "matcher": {
               "id": "byName",
@@ -2291,17 +2209,17 @@
         ]
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 5,
+        "w": 1,
         "x": 9,
-        "y": 9
+        "y": 8
       },
-      "id": 17,
+      "id": 52,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": ["lastNotNull"],
@@ -2311,7 +2229,7 @@
         "showPercentChange": false,
         "text": {
           "titleSize": 12,
-          "valueSize": 16
+          "valueSize": 20
         },
         "textMode": "value_and_name",
         "wideLayout": false
@@ -2323,7 +2241,7 @@
           "exemplar": false,
           "expr": "rate(otelcol_receiver_accepted_metric_points_total{service_name=\"otelcol-gateway\", service_instance_id=\"gateway-1\", receiver=\"otlp\"}[5m])",
           "instant": true,
-          "legendFormat": "accepted",
+          "legendFormat": "acc [c/s]",
           "range": false,
           "refId": "A"
         },
@@ -2388,7 +2306,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 10
+        "y": 9
       },
       "id": 47,
       "options": {
@@ -2434,76 +2352,6 @@
             "mode": "thresholds"
           },
           "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 1,
-        "w": 3,
-        "x": 9,
-        "y": 11
-      },
-      "id": 25,
-      "options": {
-        "colorMode": "none",
-        "graphMode": "none",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "valueSize": 15
-        },
-        "textMode": "name",
-        "wideLayout": true
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "datasource": {
-            "name": "Expression",
-            "type": "__expr__",
-            "uid": "__expr__"
-          },
-          "expression": "0",
-          "hide": false,
-          "refId": "rcvr/podman_stats",
-          "type": "math"
-        }
-      ],
-      "title": "",
-      "transparent": true,
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "mappings": [],
           "min": 0,
           "thresholds": {
             "mode": "absolute",
@@ -2522,7 +2370,7 @@
         "h": 2,
         "w": 2,
         "x": 0,
-        "y": 12
+        "y": 11
       },
       "id": 11,
       "options": {
@@ -2591,7 +2439,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 12
+        "y": 11
       },
       "id": 14,
       "options": {
@@ -2627,161 +2475,6 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "victoria_metrics"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
-          "decimals": 0,
-          "fieldMinMax": false,
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": 0
-              }
-            ]
-          }
-        },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "accepted"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "cps"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "refused"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "text",
-                      "value": 0
-                    },
-                    {
-                      "color": "orange",
-                      "value": 1
-                    }
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "failed"
-            },
-            "properties": [
-              {
-                "id": "thresholds",
-                "value": {
-                  "mode": "absolute",
-                  "steps": [
-                    {
-                      "color": "text",
-                      "value": 0
-                    },
-                    {
-                      "color": "red",
-                      "value": 1
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
-      },
-      "gridPos": {
-        "h": 2,
-        "w": 3,
-        "x": 9,
-        "y": 12
-      },
-      "id": 18,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "none",
-        "justifyMode": "center",
-        "orientation": "auto",
-        "percentChangeColorMode": "standard",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showPercentChange": false,
-        "text": {
-          "titleSize": 12,
-          "valueSize": 16
-        },
-        "textMode": "value_and_name",
-        "wideLayout": false
-      },
-      "pluginVersion": "12.3.1",
-      "targets": [
-        {
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "rate(otelcol_receiver_accepted_metric_points_total{service_name=\"otelcol-gateway\", receiver=\"podman_stats\"}[5m])",
-          "instant": true,
-          "legendFormat": "accepted",
-          "range": false,
-          "refId": "A"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(otelcol_receiver_refused_metric_points_total{service_name=\"otelcol-gateway\", receiver=\"podman_stats\"}[5m])",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "refused",
-          "range": false,
-          "refId": "B"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "victoria_metrics"
-          },
-          "editorMode": "code",
-          "exemplar": false,
-          "expr": "increase(otelcol_receiver_failed_metric_points_total{service_name=\"otelcol-gateway\", receiver=\"podman_stats\"}[5m])",
-          "hide": false,
-          "instant": true,
-          "legendFormat": "failed",
-          "range": false,
-          "refId": "C"
-        }
-      ],
-      "title": "",
-      "type": "stat"
-    },
-    {
       "fieldConfig": {
         "defaults": {},
         "overrides": []
@@ -2790,7 +2483,7 @@
         "h": 4,
         "w": 2,
         "x": 0,
-        "y": 14
+        "y": 13
       },
       "id": 44,
       "options": {
@@ -2844,7 +2537,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 14
+        "y": 13
       },
       "id": 46,
       "options": {
@@ -2946,7 +2639,7 @@
         "h": 6,
         "w": 4,
         "x": 5,
-        "y": 14
+        "y": 13
       },
       "id": 49,
       "options": {
@@ -3016,11 +2709,11 @@
       },
       "gridPos": {
         "h": 1,
-        "w": 3,
+        "w": 1,
         "x": 9,
-        "y": 14
+        "y": 13
       },
-      "id": 50,
+      "id": 54,
       "options": {
         "colorMode": "none",
         "graphMode": "none",
@@ -3034,7 +2727,7 @@
         },
         "showPercentChange": false,
         "text": {
-          "valueSize": 15
+          "valueSize": 10
         },
         "textMode": "name",
         "wideLayout": true
@@ -3081,18 +2774,6 @@
           }
         },
         "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "accepted"
-            },
-            "properties": [
-              {
-                "id": "unit",
-                "value": "cps"
-              }
-            ]
-          },
           {
             "matcher": {
               "id": "byName",
@@ -3144,17 +2825,17 @@
         ]
       },
       "gridPos": {
-        "h": 2,
-        "w": 3,
+        "h": 5,
+        "w": 1,
         "x": 9,
-        "y": 15
+        "y": 14
       },
-      "id": 51,
+      "id": 53,
       "options": {
         "colorMode": "value",
         "graphMode": "none",
         "justifyMode": "center",
-        "orientation": "auto",
+        "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": ["lastNotNull"],
@@ -3164,7 +2845,7 @@
         "showPercentChange": false,
         "text": {
           "titleSize": 12,
-          "valueSize": 16
+          "valueSize": 20
         },
         "textMode": "value_and_name",
         "wideLayout": false
@@ -3176,7 +2857,7 @@
           "exemplar": false,
           "expr": "rate(otelcol_receiver_accepted_metric_points_total{service_name=\"otelcol-gateway\", service_instance_id=\"gateway-2\", receiver=\"otlp\"}[5m])",
           "instant": true,
-          "legendFormat": "accepted",
+          "legendFormat": "acc [c/s]",
           "range": false,
           "refId": "A"
         },
@@ -3241,7 +2922,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 16
+        "y": 15
       },
       "id": 13,
       "options": {
@@ -3305,7 +2986,7 @@
         "h": 2,
         "w": 2,
         "x": 0,
-        "y": 18
+        "y": 17
       },
       "id": 45,
       "options": {
@@ -3374,7 +3055,7 @@
         "h": 2,
         "w": 3,
         "x": 2,
-        "y": 18
+        "y": 17
       },
       "id": 48,
       "options": {
@@ -3425,5 +3106,5 @@
   "timezone": "browser",
   "title": "02_collection",
   "uid": "02_collection",
-  "version": 3
+  "version": 1
 }

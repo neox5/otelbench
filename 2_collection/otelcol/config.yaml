@@ -89,9 +89,6 @@ service:
                 endpoint: http://localhost:4317
 
     resource:
-      # Use Prometheus format (underscores) for consistency with gateway
-      # These attributes route through gateway's prometheusremotewrite exporter
-      # which converts OTLP dots to Prometheus underscores, so we pre-convert
       service.name: otelcol
       service.version: 0.1.0
       deployment.environment: development
