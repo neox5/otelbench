@@ -42,12 +42,4 @@ restart: down up
 
 # View logs
 logs:
-	podman-compose logs -f
-
-# View only error logs
-logs-errors:
-	podman-compose logs --names 2>&1 | rg error
-
-# View error and warning logs
-logs-errors-warn:
-	podman-compose logs --names 2>&1 | rg "error|warn"
+	podman-compose logs --names 2>&1
